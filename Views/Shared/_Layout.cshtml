@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"] - ASP.NET MVC Music Store</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Content/Site.css" />
+    <link rel="stylesheet" href="~/MvcMusicStoreModernized.styles.css" asp-append-version="true" />
+
+    <style>
+        .legacy-button,
+        button.legacy-button,
+        input.legacy-button,
+        a.legacy-button {
+            clear: none !important;
+            display: inline-block !important;
+            padding: 8px 14px !important;
+            margin: 0 !important;
+            border: 1px solid #2f2c28 !important;
+            background-color: #3f3c37 !important;
+            color: #ffffff !important;
+            font-weight: bold !important;
+            font-size: 15px !important;
+            font-family: Arial, Helvetica, sans-serif !important;
+            line-height: 20px !important;
+            text-decoration: none !important;
+            cursor: pointer !important;
+            border-radius: 0 !important;
+            box-shadow: 2px 2px 3px #9b9993 !important;
+        }
+
+            .legacy-button:hover,
+            button.legacy-button:hover,
+            input.legacy-button:hover,
+            a.legacy-button:hover {
+                background-color: #222222 !important;
+                border-color: #222222 !important;
+                color: #ffffff !important;
+            }
+
+        .form-actions {
+            margin-top: 12px !important;
+            display: flex !important;
+            align-items: center !important;
+            gap: 8px !important;
+            flex-wrap: wrap !important;
+        }
+    </style>
+
+</head>
+<body>
+    <div id="header">
+        <h1>
+            <a asp-controller="Home" asp-action="Index">ASP.NET MVC MUSIC STORE</a>
+        </h1>
+
+        <ul id="navlist">
+            <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+            <li><a asp-controller="Store" asp-action="Index">Store</a></li>
+            <li>@await Component.InvokeAsync("CartSummary")</li>
+            <li><a asp-controller="StoreManager" asp-action="Index">Admin</a></li>
+
+            @if (User.Identity?.IsAuthenticated ?? false)
+            {
+                <li>
+                    <a href="#" onclick="document.getElementById('logoutForm').submit(); return false;">Logout</a>
+                    <form id="logoutForm" asp-area="Identity" asp-page="/Account/Logout" method="post" style="display:none;"></form>
+                </li>
+            }
+            else
+            {
+                <li><a asp-area="Identity" asp-page="/Account/Register">Register</a></li>
+                <li><a asp-area="Identity" asp-page="/Account/Login">Log in</a></li>
+            }
+        </ul>
+    </div>
+
+    <div id="main">
+        @RenderBody()
+    </div>
+
+    <div id="footer">
+        built with ASP.NET Core MVC
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

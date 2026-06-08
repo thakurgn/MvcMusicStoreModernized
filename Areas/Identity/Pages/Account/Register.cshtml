@@ -1,0 +1,54 @@
+﻿@page
+@model MvcMusicStoreModernized.Areas.Identity.Pages.Account.RegisterModel
+
+@{
+    ViewData["Title"] = "Register";
+}
+
+<h2>Create a New Account</h2>
+
+<p>Use the form below to create a new account.</p>
+
+<form method="post" asp-route-returnUrl="@Model.ReturnUrl">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <fieldset>
+        <legend>Account Information</legend>
+
+        <div class="form-group mb-3">
+            <label asp-for="Input.Email"></label>
+            <input asp-for="Input.Email" class="form-control" />
+            <span asp-validation-for="Input.Email" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="Input.Password"></label>
+            <input asp-for="Input.Password" class="form-control" />
+            <span asp-validation-for="Input.Password" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="Input.ConfirmPassword"></label>
+            <input asp-for="Input.ConfirmPassword" class="form-control" />
+            <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="legacy-button">Register</button>
+            <button type="button" class="legacy-button"
+                    onclick="location.href='@Url.Action("Index", "Home")'">
+                Cancel
+            </button>
+        </div>
+    </fieldset>
+</form>
+
+<p>
+    <a asp-area="Identity" asp-page="/Account/Login">Already have an account? Log On</a>
+</p>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

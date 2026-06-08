@@ -1,0 +1,18 @@
+﻿@model MvcMusicStoreModernized.Models.Order
+
+@{
+    ViewData["Title"] = "Order Complete";
+}
+
+<h2>Order Complete</h2>
+
+<p>Thank you. Your order has been placed successfully.</p>
+
+<p>
+    Order Number:
+    <strong>@Model.OrderId</strong>
+</p>
+
+<p>
+    <a asp-controller="Store" asp-action="Index">Continue Shopping</a>
+</p>

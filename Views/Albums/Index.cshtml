@@ -1,0 +1,41 @@
+@model IEnumerable<MvcMusicStoreModernized.Models.Album>
+
+@{
+    ViewData["Title"] = "Albums";
+}
+
+<h1>Albums</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create New</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Artist</th>
+            <th>Genre</th>
+            <th>Price</th>
+            <th>Album Art URL</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Title</td>
+                <td>@item.Artist?.Name</td>
+                <td>@item.Genre?.Name</td>
+                <td>@item.Price</td>
+                <td>@item.AlbumArtUrl</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.AlbumId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.AlbumId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.AlbumId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

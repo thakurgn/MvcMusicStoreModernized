@@ -1,0 +1,32 @@
+﻿@model MvcMusicStoreModernized.Models.Genre
+
+@{
+    ViewData["Title"] = "Genre Details";
+}
+
+<h1>Genre Details</h1>
+
+<dl class="row">
+    <dt class="col-sm-2">Genre Name</dt>
+    <dd class="col-sm-10">@Model.Name</dd>
+
+    <dt class="col-sm-2">Description</dt>
+    <dd class="col-sm-10">@Model.Description</dd>
+
+    <dt class="col-sm-2">Linked Albums</dt>
+    <dd class="col-sm-10">@(Model.Albums?.Count ?? 0)</dd>
+</dl>
+
+@if (Model.Albums != null && Model.Albums.Count > 0)
+{
+    <h5>Albums</h5>
+    <ul>
+        @foreach (var album in Model.Albums)
+        {
+            <li>@album.Title</li>
+        }
+    </ul>
+}
+
+<a asp-action="Edit" asp-route-id="@Model.GenreId" class="btn btn-primary">Edit</a>
+<a asp-action="Index" class="btn btn-secondary">Back to List</a>

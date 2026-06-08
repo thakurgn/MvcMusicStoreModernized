@@ -1,0 +1,56 @@
+﻿@model IEnumerable<MvcMusicStoreModernized.Models.Cart>
+
+@{
+    ViewData["Title"] = "Shopping Cart";
+}
+
+<h2>Your Shopping Cart</h2>
+
+@if (!Model.Any())
+{
+    <p>Your cart is empty.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Album</th>
+                <th>Artist</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Line Total</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Album?.Title</td>
+                    <td>@item.Album?.Artist?.Name</td>
+                    <td>@item.Album?.Price</td>
+                    <td>@item.Count</td>
+                    <td>@((item.Album?.Price ?? 0) * item.Count)</td>
+                    <td>
+                        <a asp-action="RemoveFromCart" asp-route-id="@item.RecordId">Remove one</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <p>
+        <strong>Total:</strong> @ViewBag.CartTotal
+    </p>
+
+    <p>
+        <a asp-controller="Checkout" asp-action="Index" class="btn btn-primary">
+            Checkout
+        </a>
+    </p>
+}
+
+<p>
+    <a asp-controller="Store" asp-action="Index">Continue Shopping</a>
+</p>
